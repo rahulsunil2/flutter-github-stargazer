@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:star_counter/privacy_policy.dart';
 import 'star_counter.dart';
 
 void main() {
@@ -11,11 +10,11 @@ class StarCounterApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
-          brightness: Brightness.light,
+          brightness: Brightness.dark,
         ),
         routes: {
           '/': (context) => HomePage(),
-          '/privacypolicy': (context) => PrivacyPolicy()
+          '/privacy_policy': (context) => PrivacyPolicy()
         });
   }
 }
@@ -47,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   TextField(
                     decoration: InputDecoration(
-                      labelText: 'Enter a GitHub repository',
+                      labelText: 'Enter a GitHub Repo',
                       hintText: 'flutter/flutter',
                     ),
                     onSubmitted: (text) {
@@ -68,10 +67,58 @@ class _HomePageState extends State<HomePage> {
                       overlayColor:
                           MaterialStateProperty.all(Colors.transparent),
                     ),
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed('/privacypolicy'),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/privacy_policy');
+                    },
                     child: Text('Privacy Policy'),
                   ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class PrivacyPolicy extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: 800),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "Privacy Policy",
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                  SizedBox(height: 20.0),
+                  Text(
+                    "Flutter Example Company built the Star Counter app as an Open Source app. This SERVICE is provided by Flutter Example Company at no cost and is intended for use as is. This page is used to inform visitors regarding our policies with the collection, use, and disclosure of Personal Information if anyone decided to use our Service. If you choose to use our Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that we collect is  used for providing and improving the Service. We will not use or share your information with anyone except as described in this Privacy Policy.The terms used in  this Privacy Policy have the same meanings as in our Terms and Conditions, which is accessible at Star Counter unless otherwise defined in this Privacy Policy.",
+                    textAlign: TextAlign.left,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  SizedBox(height: 20.0),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      foregroundColor: MaterialStateProperty.all(
+                          Color.fromRGBO(0, 49, 83, 255)),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/');
+                    },
+                    child: Text(
+                      "Go Back",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  )
                 ],
               ),
             ),
